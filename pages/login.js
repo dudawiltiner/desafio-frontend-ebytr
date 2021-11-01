@@ -7,7 +7,7 @@ import NavBar from '../components/navBar';
 export default function LoginMain() {
   return (
     <div>
-      <NavBar name={ false } />
+      <NavBar showName={ false } />
       <main className="h-screen overflow-hidden md:overflow-auto">
         <Login />
       </main>

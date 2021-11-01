@@ -1,7 +1,12 @@
 import React from 'react';
+import NavBar from '../components/navBar';
+import ProgressBar from '../components/progressBar';
 
-export default function home() {
+export default function HomeMain() {
   return (
-    <div />
+    <main className="h-screen overflow-hidden dark:bg-dark-color md:overflow-auto">
+      <NavBar showName />
+      <ProgressBar collaborator="Nome" />
+    </main>
   );
 }
