@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-export default function TimeLineTask() {
+export default function TimeLineTask({ showEdit }) {
   // eslint-disable-next-line sonarjs/no-duplicate-string
   const [seta, setSeta] = useState(['transition duration-500']);
   const [list, setList] = useState(['invisible h-0 transition duration-500']);
@@ -38,14 +39,18 @@ export default function TimeLineTask() {
                   <div className="w-5 h-5 rounded-full bg-red-color" />
                   <p>Pendente</p>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-blue-color" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                  <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
-                </svg>
+                <button onClick={ () => showEdit('change') } type="button">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-blue-color" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                    <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
+                  </svg>
+                </button>
               </div>
+
               <svg xmlns="http://www.w3.org/2000/svg" className={ `w-5 h-5 dark:text-gray-200 ${seta[0]}` } viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
+
             </div>
           </div>
           <div className={ `${list[0]}` }>
@@ -70,3 +75,7 @@ export default function TimeLineTask() {
     </div>
   );
 }
+
+TimeLineTask.propTypes = {
+  showEdit: PropTypes.func,
+}.Required;
