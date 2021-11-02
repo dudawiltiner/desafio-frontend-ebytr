@@ -3,6 +3,7 @@
 /* eslint-disable max-len */
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { convertStatus, NEGATIVENUMBER, NULLNUMBER, POSITIVENUMBER } from '../helper/convertFunc/convertStatus';
 
 export default function TimeLineTask({ showEdit, setTask }) {
   const [taskList, setTaskList] = useState(JSON.parse(localStorage.getItem('tasks')));
@@ -13,15 +14,11 @@ export default function TimeLineTask({ showEdit, setTask }) {
   const [list, setList] = useState(taskList.map(() => 'invisible h-0'));
 
   const foundName = (id, isStatus) => {
-    // console.log(statusList);
     if (isStatus && statusList !== null) {
       const statusFiltered = statusList.filter((item) => item.id === id);
-      // console.log(statusFiltered[0].nameStatus);
-      // console.log(colors[statusFiltered[0].nameStatus]);
       return statusFiltered[0].nameStatus;
     } if (collabList !== null) {
       const collabFiltered = collabList.filter((item) => item.id === id);
-      // console.log(collabFiltered);
       return `${collabFiltered[0].nameCollab[0]} ${collabFiltered[0].nameCollab[1]}`;
     }
   };
@@ -46,10 +43,6 @@ export default function TimeLineTask({ showEdit, setTask }) {
     setList([...newList]);
   };
 
-  const NEGATIVENUMBER = -1;
-  const POSITIVENUMBER = 1;
-  const NULLNUMBER = 0;
-
   const alphabeticalOrder = () => {
     function compare(a, b) {
       if (a.title.toUpperCase() < b.title.toUpperCase()) { return NEGATIVENUMBER; }
@@ -57,9 +50,7 @@ export default function TimeLineTask({ showEdit, setTask }) {
       return NULLNUMBER;
     }
 
-    console.log('aqui');
     const arrayList = taskList.sort(compare);
-    // console.log(arrayList);
     setTaskList([...arrayList]);
   };
 
@@ -70,19 +61,8 @@ export default function TimeLineTask({ showEdit, setTask }) {
       return NULLNUMBER;
     }
 
-    console.log('aqui');
     const arrayList = taskList.sort(compare);
-    // console.log(arrayList);
     setTaskList([...arrayList]);
-  };
-
-  const convertStatus = (status) => {
-    if (status === 'Pronto') {
-      return POSITIVENUMBER;
-    } if (status === 'Pendente') {
-      return NEGATIVENUMBER;
-    }
-    return NULLNUMBER;
   };
 
   const statusOrder = () => {
@@ -92,9 +72,7 @@ export default function TimeLineTask({ showEdit, setTask }) {
       return NULLNUMBER;
     }
 
-    console.log('aqui');
     const arrayList = taskList.sort(compare);
-    // console.log(arrayList);
     setTaskList([...arrayList]);
   };
 

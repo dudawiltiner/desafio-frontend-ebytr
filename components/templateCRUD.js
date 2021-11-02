@@ -1,11 +1,10 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import cookieCutter from 'cookie-cutter';
 import { useRouter } from 'next/router';
-import { fetchCreateTask, fetchDeleteTask, fetchUpdateTask } from '../services/taskAPI';
+import { createOne, deleteOne, updateOne } from '../helper/asyncFunc/asyncTasks';
+import { unDate } from '../helper/convertFunc/formatDate';
 
 export default function TemplateCRUD({ showRemover, nameType, labelDeadline, labelStatus, close, task }) {
   const [statusList] = useState(JSON.parse(localStorage.getItem('status')));
@@ -13,148 +12,29 @@ export default function TemplateCRUD({ showRemover, nameType, labelDeadline, lab
   const [title, setTitle] = useState(!task.title ? '' : task.title);
   const [description, setDescription] = useState(!task.description ? '' : task.description);
   const [status, setStatus] = useState(!task.statusId ? statusList[0].id : task.statusId);
-
-  const unDate = (dateOne) => {
-    if (!dateOne) {
-      const data = new Date();
-      const dia = data.getDate().toString().padStart(2, '0');
-      const mes = (data.getMonth() + 1).toString().padStart(2, '0');
-      const ano = data.getFullYear();
-      return `${ano}-${mes}-${dia}`;
-    }
-    const dateUnFormated = dateOne.split('/');
-    const dia = dateUnFormated[0];
-    const mes = dateUnFormated[1];
-    const ano = dateUnFormated[2];
-    return `${ano}-${mes}-${dia}`;
-  };
   const [date, setDate] = useState(unDate(task.deadlineDate));
   const [collab, setCollab] = useState(!task.collaboratorId ? collabsList[0].id : task.collaboratorId);
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
   const router = useRouter();
 
-  const formatDate = (selectedDate) => {
-    const dateFormated = selectedDate.split('/');
-    if (dateFormated.length === 1) {
-      const arrayDate = selectedDate.split('-');
-      return `${arrayDate[2]}/${arrayDate[1]}/${arrayDate[0]}`;
-    }
-
-    return selectedDate;
-  };
-
-  const dateNow = () => {
-    const data = new Date();
-    const dia = data.getDate().toString().padStart(2, '0');
-    const mes = (data.getMonth() + 1).toString().padStart(2, '0');
-    const ano = data.getFullYear();
-    return `${dia}/${mes}/${ano}`;
-  };
-
-  console.log(task);
-
-  const createTask = async (e) => {
-    e.preventDefault();
-    console.log(title, description, status, date, collab);
+  const createTask = async () => {
     setShow1(!show1);
-
-    try {
-      const res = await fetchCreateTask({
-        token: cookieCutter.get('token'),
-        collaboratorId: collab,
-        statusId: status,
-        title,
-        description,
-        deadlineDate: formatDate(date),
-      });
-      if (res.id) {
-        console.log(res);
-        const arrayTotal = JSON.parse(localStorage.getItem('tasks'));
-        arrayTotal.push({
-          _id: res.id,
-          collaboratorId: collab,
-          statusId: status,
-          title,
-          description,
-          createdDate: dateNow(),
-          deadlineDate: formatDate(date),
-        });
-        console.log(arrayTotal);
-        localStorage.setItem('tasks', JSON.stringify(arrayTotal));
-        router.reload();
-      }
-      setShow1(false);
-      console.log(res.message);
-    } catch (error) {
-      setShow1(false);
-      console.log(error);
-    }
+    await createOne({ title, description, status, date, collab, router });
+    setShow1(false);
   };
 
-  const deleteTask = async (e) => {
-    e.preventDefault();
-    console.log(task._id);
+  const deleteTask = async () => {
     setShow(!show);
-
-    try {
-      const res = await fetchDeleteTask({
-        token: cookieCutter.get('token'),
-        id: task._id,
-      });
-      if (res.message === 'Tarefa excluída com sucesso') {
-        const arrayTotal = JSON.parse(localStorage.getItem('tasks'));
-        const newA = arrayTotal.filter((item) => item._id !== task._id);
-        console.log(arrayTotal);
-        localStorage.setItem('tasks', JSON.stringify(newA));
-        router.reload();
-      }
-      setShow(false);
-      console.log(res.message);
-    } catch (error) {
-      setShow(false);
-      console.log(error);
-    }
+    await deleteOne(task, router);
+    setShow(false);
   };
 
-  const updateTask = async (e) => {
-    e.preventDefault();
-    console.log(title, description, status, date, collab);
+  const updateTask = async () => {
     setShow1(!show1);
-
-    try {
-      const res = await fetchUpdateTask({
-        token: cookieCutter.get('token'),
-        id: task._id,
-        collaboratorId: collab,
-        statusId: status,
-        title,
-        description,
-        deadlineDate: formatDate(date),
-      });
-      if (res.message.includes('Tarefa atualizada com sucesso')) {
-        console.log(res);
-        const arrayTotal = JSON.parse(localStorage.getItem('tasks'));
-        const index = arrayTotal.findIndex((item) => item._id === task._id);
-        arrayTotal[index] = {
-          _id: task._id,
-          collaboratorId: collab,
-          statusId: status,
-          title,
-          description,
-          createdDate: task.createdDate,
-          deadlineDate: formatDate(date),
-        };
-        console.log(arrayTotal);
-        localStorage.setItem('tasks', JSON.stringify(arrayTotal));
-        // router.reload();
-      }
-      setShow1(false);
-      console.log(res.message);
-    } catch (error) {
-      setShow1(false);
-      console.log(error);
-    }
+    await updateOne({
+      task, collab, status, title, description, date, router });
+    setShow1(false);
   };
 
   return (

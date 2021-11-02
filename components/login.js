@@ -1,9 +1,8 @@
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
 import React, { useState } from 'react';
-import cookieCutter from 'cookie-cutter';
 import { useRouter } from 'next/router';
-import { fetchAuthCollaborator } from '../services/collaboratorAPI';
+import { authOne } from '../helper/asyncFunc/asyncCollaborator';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -14,23 +13,8 @@ export default function Login() {
   const auth = async (e) => {
     e.preventDefault();
     setShow(!show);
-    try {
-      const res = await fetchAuthCollaborator(email, password);
-      if (!res.message) {
-        const dateLater = new Date();
-        dateLater.setDate(dateLater.getDate() + 1);
-        // console.log(dateLater)
-        cookieCutter.set('token', res.token, { expires: dateLater });
-        cookieCutter.set('collaborator', res.collaborator, { expires: dateLater });
-        console.log(res, cookieCutter.get('token'), cookieCutter.get('collaborator'));
-        router.push('/');
-      }
-      setShow(false);
-      console.log(res.message);
-    } catch (error) {
-      setShow(false);
-      console.log(error);
-    }
+    await authOne(email, password, router);
+    setShow(false);
   };
 
   return (
