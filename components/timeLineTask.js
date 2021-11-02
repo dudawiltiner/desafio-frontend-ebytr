@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 export default function TimeLineTask({ showEdit, setTask }) {
   const [taskList, setTaskList] = useState(JSON.parse(localStorage.getItem('tasks')));
