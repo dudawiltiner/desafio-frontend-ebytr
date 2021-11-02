@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import Typewriter from 'typewriter-effect';
 import { authOne } from '../helper/asyncFunc/asyncCollaborator';
 
 export default function Login() {
@@ -21,7 +22,16 @@ export default function Login() {
     <div className="flex flex-col items-center justify-center invisible w-full h-0 min-h-screen px-10 md:visible md:h-full">
       <div className="flex space-x-20">
         <div className="max-w-md">
-          <p className="mt-16 text-gray-800 text-7xl mb-14 animate-bounce-slow">To Do List</p>
+          <p className="mt-16 text-gray-800 text-7xl mb-14 animate-bounce-slow">
+            <Typewriter
+              options={ {
+                strings: 'To Do List',
+                autoStart: true,
+                delay: 150,
+                loop: true,
+              } }
+            />
+          </p>
           <img className="w-full" src="/list.svg" alt="Imagem da logo" />
         </div>
         <div className="flex flex-col items-center justify-center max-w-md p-12 rounded-lg shadow-xl shadow-white">
@@ -32,11 +42,11 @@ export default function Login() {
           <form onSubmit={ auth } className="w-full mt-6 space-y-10">
             <div className="py-2 space-y-2 border-b border-brown-color">
               <p className=" text-md ext-gray-800">Qual o seu email?</p>
-              <input onChange={ ({ target }) => setEmail(target.value) } className="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none dark:text-gray-200 focus:outline-none" type="text" placeholder="nome@nome.com" />
+              <input onChange={ ({ target }) => setEmail(target.value) } required className="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none dark:text-gray-200 focus:outline-none" type="text" placeholder="nome@nome.com" />
             </div>
             <div className="py-2 border-b border-brown-color">
               <p className=" text-md ext-gray-800">Digite a sua senha:</p>
-              <input onChange={ ({ target }) => setPassword(target.value) } className="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none dark:text-gray-200 focus:outline-none" type="password" placeholder="•••••••••" />
+              <input onChange={ ({ target }) => setPassword(target.value) } required className="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none dark:text-gray-200 focus:outline-none" type="password" placeholder="•••••••••" />
             </div>
             <button className="flex px-2 py-1 text-sm text-white border-4 border-teal-500 rounded cursor-pointer bg-brown-color" type="submit">
               { show

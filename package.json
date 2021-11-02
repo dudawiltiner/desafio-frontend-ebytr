@@ -7,11 +7,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "ciqu-react-calendar": "^1.0.2",
     "cookie-cutter": "^0.2.0",
     "next": "latest",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-flickity-component": "^3.6.2",
+    "react-testing-library": "^8.0.1",
+    "typewriter-effect": "^2.18.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",

@@ -102,6 +102,7 @@ export default function TemplateCRUD({ showRemover, nameType, labelDeadline, lab
               <div className="p-2 rounded-md bg-yellow-color">
                 <p className="pb-1 text-white">{labelStatus}</p>
                 <select
+                  value={ status }
                   onChange={ ({ target }) => setStatus(target.value) }
                   className="bg-white rounded-sm focus:outline-none"
                   id="status"
@@ -118,13 +119,14 @@ export default function TemplateCRUD({ showRemover, nameType, labelDeadline, lab
               <div className="flex items-center space-x-2">
                 <p className="text-gray-900"><b>Responsável:</b></p>
                 <select
-                  defaultValue={ collabsList[0].id }
+                  value={ collab }
                   onChange={ ({ target }) => setCollab(target.value) }
                   className="bg-white border-2 rounded-sm focus:outline-none"
                   id="responsavel"
                   required
                 >
                   {collabsList.map((item) => <option key={ item.id } value={ item.id }>{`${item.nameCollab[0]} ${item.nameCollab[1]}`}</option>)}
+                  <option selected>UNNN</option>
                 </select>
               </div>
             </label>
