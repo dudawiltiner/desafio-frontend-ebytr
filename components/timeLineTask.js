@@ -98,7 +98,7 @@ export default function TimeLineTask({ showEdit, setTask }) {
                   <div className="w-2 h-2 bg-white border-2 border-gray-500 rounded-full " />
                 </div>
                 <div role="button" tabIndex="0" onClick={ () => clickStep(index) } className="flex justify-between w-full p-2 ml-4 font-medium text-gray-600 rounded-lg shadow-lg cursor-pointer">
-                  <div className="flex items-center space-x-4 text-lg dark:text-gray-100">
+                  <div className="flex items-center space-x-4 text-lg">
                     <p>{`${item.title} - ${foundName(item.collaboratorId, false)}`}</p>
                     <div className="flex items-center space-x-1">
                       <div className={ `w-5 h-5 rounded-full bg-${colors[foundName(item.statusId, true)]}-color` } />
@@ -106,7 +106,7 @@ export default function TimeLineTask({ showEdit, setTask }) {
                     </div>
                   </div>
 
-                  <svg xmlns="http://www.w3.org/2000/svg" className={ `w-5 h-5 dark:text-gray-200 transition duration-500 ${seta[index]}` } viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className={ `w-5 h-5 transition duration-500 ${seta[index]}` } viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
 

@@ -6,7 +6,6 @@ import Loading from '../components/loading';
 import NavBar from '../components/navBar';
 import ProgressBar from '../components/progressBar';
 import { fetchGetAllTask } from '../services/taskAPI';
-
 import { takeCollabs } from '../helper/asyncFunc/asyncCollaborator';
 import { takeStatus } from '../helper/asyncFunc/asyncStatus';
 
@@ -53,7 +52,7 @@ export default function HomeMain() {
   }, []);
 
   return (
-    <main className="h-screen overflow-hidden dark:bg-dark-color md:overflow-auto">
+    <main className="h-0 overflow-hidden md:h-screen md:overflow-auto">
       { loading ? <Loading />
         : (
           <>

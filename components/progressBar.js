@@ -20,7 +20,7 @@ export default function ProgressBar({ collaborator }) {
       <p className="text-4xl text-gray-800">{`Boas-vindas, ${collaborator}!`}</p>
       <div className="flex p-10 mt-10 rounded-lg shadow-xl">
         <div className="w-2/3 ">
-          <p className="text-2xl text-gray-800 border-b border-gray-300 dark:border-gray-500">Progresso da Lista de Tarefas</p>
+          <p className="text-2xl text-gray-800 border-b border-gray-300">Progresso da Lista de Tarefas</p>
           <div className="relative pt-16">
             <TemplateBar progressPercentage={ PERCENT } />
           </div>

@@ -38,7 +38,7 @@ export default function TemplateCRUD({ showRemover, nameType, labelDeadline, lab
   };
 
   return (
-    <div className="fixed top-0 bottom-0 z-40 flex items-center justify-center bg-gray-700 bg-opacity-70 right-40 left-40 xl:right-0 xl:left-0">
+    <div className="fixed top-0 bottom-0 left-0 right-0 z-40 flex items-center justify-center bg-gray-700 bg-opacity-70">
       <div className="flex flex-col items-start justify-center max-w-md px-12 pt-4 pb-12 bg-white rounded-lg shadow-xl right-40 left-40 shadow-white">
         <button type="button" onClick={ () => close('') } className="flex justify-end w-full">
           <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 hover:text-red-color text-blue-color" fill="none" viewBox="0 0 24 24" stroke="currentColor">
