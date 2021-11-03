@@ -1,29 +1,72 @@
-# Next.js + Tailwind CSS Example
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+# Desafio Front-End - Ebytr
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+## Introdução
 
-## Preview
+Essa é parte do desafio técnico da Ebytr reservada para o desenvolvimento do **front-end** que foi feita para atender a arquitetura da stack [MERN](https://www.mongodb.com/mern-stack) como requisitado. Neste trabalho foi, primeiramente, contruído um **Mockup** para o desgin da plataforma To Do List da Ebytr. Esse passo facilitou na componentização, na hieraquização e organização do código, e na estilização de cada parte densenvolvida.
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+Foi criada uma tela de **Login** que vai servir para autenticação dos usuários ou colaboradores cadastrados para terem acesso ao acompanhamentos das atividades. Foi, também, desenvolvida a **Home**, a tela principal em que vai englobar o progresso da atividade e a lista de tarefas que podem ser ordenadas por ordem alfabética, pelo status e pela data de criação. E, por fim, foram construídas a tela de **erro 404** e a tela de **Loading**, a primeira para tratar o erro gerado por digitar a URL incorretamente e a segunda para "mascarar" o carregamento das páginas, ambas com o objetivo de melhorar a **experiência do usuário**. 
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+Todas as telas foram feitas, primeiramente, de forma estática para então obter dados a partir da conexão com a **API** criada no **back-end**. É importante dizer que alguns testes foram realizados para garantir o funcionamento e melhor manutenção do código.
 
-## Deploy your own
+As ferramentas principais utilizadas foran:
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+[React](https://reactjs.org/)<br>
+[Next](https://nextjs.org/)<br>
+[Vercel](https://vercel.com/)<br>
+[ESLint](https://eslint.org/)<br>
+[Tailwind.css](https://tailwindcss.com/)<br>
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+---
 
-## How to use
+## Uso do projeto localmente
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+### Clone do repositório
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+Após cada um dos passos a seguir, haverá um exemplo do comando a ser digitado para fazer o que está sendo pedido, caso tenha dificuldades e o exemplo não seja suficiente, não hesite em me contatar em _eduardawiltiner@gmail.com_.
+
+1. Abra o terminal e crie um diretório no local de sua preferência com o comando **mkdir**:
+```javascript
+  mkdir frontend-ebytr
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+2. Entre no diretório que acabou de criar e depois clone o projeto:
+```javascript
+  cd frontend-ebytr
+  git clone https://github.com/dudawiltiner/desafio-backend-ebytr.git
+```
+
+### Instalação das dependências
+
+3. Entre no diretório criado após a clonagem do repositório.
+```javascript
+  cd desafio-frontend-ebytr
+```
+
+4. Installe todas as dependências.
+```javascript
+  npm install
+```
+### Debug da aplicação
+
+5. Abra no ambiente de desenvolvimento de sua preferência.
+```javascript
+  code .
+```
+
+4. Rode a aplicação com o node.js.
+```javascript
+  npm run dev
+```
+
+### Realizar testes na aplicação
+
+5. Rode o teste da aplicação com o node.js.
+```javascript
+  npm run test
+```
+
+## Link para o deploy da API:
+https://desafio-backend-ebytr.herokuapp.com/
+
+OBS:Lembrando que para acessar a plataforma deve possuir um cadastro no banco de dados.
