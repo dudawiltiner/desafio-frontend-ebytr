@@ -7,7 +7,7 @@ export default function Custom404() {
     <div className="flex items-center min-h-screen text-white">
       <div className="container flex flex-wrap items-center p-4 mx-auto">
         <div className="w-4/5 p-4 text-center md:w-5/12">
-          <img className="" src="/question.svg" alt="Não encontrado" />
+          <img className="animate-bounce" src="/question.svg" alt="Não encontrado" />
         </div>
         <div className="w-full p-16 text-center text-gray-700 md:w-7/12 md:text-left">
           <div className="mb-10 text-6xl font-medium text-red-color">404</div>
