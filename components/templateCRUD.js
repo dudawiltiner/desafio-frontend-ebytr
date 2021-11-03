@@ -126,7 +126,6 @@ export default function TemplateCRUD({ showRemover, nameType, labelDeadline, lab
                   required
                 >
                   {collabsList.map((item) => <option key={ item.id } value={ item.id }>{`${item.nameCollab[0]} ${item.nameCollab[1]}`}</option>)}
-                  <option selected>UNNN</option>
                 </select>
               </div>
             </label>

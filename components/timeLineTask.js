@@ -99,7 +99,7 @@ export default function TimeLineTask({ showEdit, setTask }) {
                 </div>
                 <div role="button" tabIndex="0" onClick={ () => clickStep(index) } className="flex justify-between w-full p-2 ml-4 font-medium text-gray-600 rounded-lg shadow-lg cursor-pointer">
                   <div className="flex items-center space-x-4 text-lg">
-                    <p>{`${item.title} - ${foundName(item.collaboratorId, false)}`}</p>
+                    <p>{item.title}</p>
                     <div className="flex items-center space-x-1">
                       <div className={ `w-5 h-5 rounded-full bg-${colors[foundName(item.statusId, true)]}-color` } />
                       <p>{foundName(item.statusId, true)}</p>
