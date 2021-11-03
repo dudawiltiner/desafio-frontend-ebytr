@@ -33,7 +33,7 @@ Após cada um dos passos a seguir, haverá um exemplo do comando a ser digitado 
 2. Entre no diretório que acabou de criar e depois clone o projeto:
 ```javascript
   cd frontend-ebytr
-  git clone https://github.com/dudawiltiner/desafio-backend-ebytr.git
+  git clone https://github.com/dudawiltiner/desafio-frontend-ebytr.git
 ```
 
 ### Instalação das dependências
