@@ -65,8 +65,7 @@ Após cada um dos passos a seguir, haverá um exemplo do comando a ser digitado 
 ```javascript
   npm run test
 ```
-
-## Link para o deploy da API:
-https://desafio-backend-ebytr.herokuapp.com/
+## Link para o deploy da Plataforma:
+https://desafioebytr.vercel.app/
 
 OBS:Lembrando que para acessar a plataforma deve possuir um cadastro no banco de dados.
