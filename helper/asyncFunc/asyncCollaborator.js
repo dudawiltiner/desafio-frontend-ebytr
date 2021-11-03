@@ -35,7 +35,7 @@ export const authOne = async (email, password, router) => {
       router.push('/');
     }
 
-    console.log(res.message);
+    return res.message;
   } catch (error) {
     console.log(error);
   }
