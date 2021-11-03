@@ -1,18 +1,38 @@
 {
   "private": true,
   "scripts": {
+    "lint": "./node_modules/.bin/eslint .",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest --watch"
   },
   "dependencies": {
+    "aos": "^2.3.4",
+    "ciqu-react-calendar": "^1.0.2",
+    "cookie-cutter": "^0.2.0",
     "next": "latest",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-flickity-component": "^3.6.2",
+    "typewriter-effect": "^2.18.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^12.1.2",
     "autoprefixer": "^10.2.6",
+    "babel-jest": "^27.3.1",
+    "eslint": "^7.32.0",
+    "eslint-config-trybe-frontend": "^1.2.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-react-redux": "^3.3.2",
+    "eslint-plugin-sonarjs": "^0.10.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.3.1",
     "postcss": "^8.3.5",
+    "react-test-renderer": "^17.0.2",
     "tailwindcss": "^2.2.4"
   }
 }
