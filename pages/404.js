@@ -12,7 +12,7 @@ export default function Custom404() {
         <div className="w-full p-16 text-center text-gray-700 md:w-7/12 md:text-left">
           <div className="mb-10 text-6xl font-medium text-red-color">404</div>
           <div className="mb-4 text-xl font-medium md:text-3xl">
-            Oops... A página está perdida no espaço
+            Oops... A página não foi encontrada.
           </div>
           <div className="mb-8 text-lg">
             Você deve ter digitado o endereço errado ou a página foi deslocada.
