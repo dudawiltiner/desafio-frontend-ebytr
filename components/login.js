@@ -18,9 +18,13 @@ export default function Login() {
     e.preventDefault();
     setShow(!show);
     const res = await authOne(email, password, router);
-    setAlertTitle('Falha na autenticação...');
-    setAlertDescription(`${res}, reveja a senha e o email preenchidos`);
-    setAlert('visible transition transform -translate-y-10 duration-500 ease-in-out');
+
+    if (res) {
+      setAlertTitle('Falha na autenticação...');
+      setAlertDescription(`${res}, reveja a senha e o email preenchidos`);
+      setAlert('visible transition transform -translate-y-10 duration-500 ease-in-out');
+    }
+
     setShow(false);
   };
 
