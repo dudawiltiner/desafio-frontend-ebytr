@@ -49,6 +49,7 @@ export default function HomeMain() {
 
   useEffect(() => {
     verify();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

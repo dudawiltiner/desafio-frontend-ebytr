@@ -22,6 +22,7 @@ export default function LoginMain() {
 
   useEffect(() => {
     verify();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div>
