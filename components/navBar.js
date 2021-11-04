@@ -1,3 +1,4 @@
+/* É importante desabilitar essas configurações para o uso do Tailwind */
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
 import PropTypes from 'prop-types';
@@ -5,14 +6,21 @@ import React, { useState } from 'react';
 import cookieCutter from 'cookie-cutter';
 import { useRouter } from 'next/router';
 
+/**
+ * Componente NavBar usada nas Pages Home e Login
+ * @param {*} param0 um OBJETO com os valores de
+ * propriedades via props.
+ * @returns um navbar que mostra a logo da Ebytr e
+ * o nome completo do usuário, quando necessário.
+ */
+
 export default function NavBar({ showName, name }) {
   const [show, setShow] = useState(false);
   const router = useRouter();
 
+  /* A função logOut Vai direcionar o usuário para a página de Login
+  e exluir todos os cookies e localStorage */
   function logOut() {
-    if (!cookieCutter.get('token')) {
-      router.push('/login');
-    }
     cookieCutter.set('token', ' ', { expires: new Date(0) });
     cookieCutter.set('collborator', ' ', { expires: new Date(0) });
     localStorage.removeItem('status');

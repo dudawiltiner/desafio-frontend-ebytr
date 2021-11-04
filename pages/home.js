@@ -5,9 +5,14 @@ import ListTask from '../components/listTask';
 import Loading from '../components/loading';
 import NavBar from '../components/navBar';
 import ProgressBar from '../components/progressBar';
-import { fetchGetAllTask } from '../services/taskAPI';
-import { takeCollabs } from '../helper/asyncFunc/asyncCollaborator';
-import { takeStatus } from '../helper/asyncFunc/asyncStatus';
+import { cookieVerifyHome } from '../helper/verifyFunc/cookieVerify';
+import { getData } from '../helper/asyncFunc/asyncData';
+
+/**
+ * Page HomeMain que pode ser acessada pela URL com "/" ou "/home"
+ * @returns todos os componentes: NavBar, ProgressBar, ListTask juntos
+ * para compor a página principal.
+ */
 
 export default function HomeMain() {
   const [loading, setLoading] = useState(true);
@@ -15,41 +20,23 @@ export default function HomeMain() {
   const [nickName, setNickName] = useState('');
   const router = useRouter();
 
-  async function verify() {
-    if (!cookieCutter.get('token')) {
-      return router.push('/login');
-    }
-    const name = cookieCutter.get('collaborator');
-    setNickName(name);
-
-    const arrayName = name.split(' ');
-    setCollaborator(arrayName[0]);
-
-    let arrayTasks = JSON.parse(localStorage.getItem('tasks'));
-
-    if (!arrayTasks) {
-      const rest = await fetchGetAllTask(cookieCutter.get('token'));
-
-      if (rest.message) {
-        console.log(rest);
-        arrayTasks = [];
-      } else {
-        console.log(rest);
-        arrayTasks = rest;
-      }
-
-      localStorage.setItem('tasks', JSON.stringify(arrayTasks));
-    }
-
-    await takeStatus();
-    await takeCollabs();
-
+  /* Busca todas as tarefas, status e colaboradores
+  registrados no banco de dados */
+  const getAllData = async () => {
+    await getData();
     setLoading(false);
-  }
+  };
 
   useEffect(() => {
-    verify();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    cookieVerifyHome(router);
+    const name = cookieCutter.get('collaborator');
+    // Salva o nome para aparecer no NavBar
+    setNickName(name);
+    const arrayName = name.split(' ');
+    // Salva o primeiro nome para aparecer nas Boas Vindas
+    setCollaborator(arrayName[0]);
+    getAllData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

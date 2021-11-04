@@ -2,6 +2,8 @@ export const NEGATIVENUMBER = -1;
 export const POSITIVENUMBER = 1;
 export const NULLNUMBER = 0;
 
+/* Converte os status em números que possam ser avaliados
+na comparação para ordenar a lista de tarefas */
 export const convertStatus = (status) => {
   if (status === 'Pronto') {
     return POSITIVENUMBER;
@@ -11,6 +13,7 @@ export const convertStatus = (status) => {
   return NULLNUMBER;
 };
 
+// Encontra o nome correspondente a cada id
 export const foundName = (id, isStatus) => {
   const statusList = JSON.parse(localStorage.getItem('status'));
   const collabList = JSON.parse(localStorage.getItem('collabs'));

@@ -1,3 +1,4 @@
+/* É importante desabilitar essas configurações para o uso do Tailwind */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
@@ -5,14 +6,26 @@ import React, { useState } from 'react';
 import TemplateCRUD from './templateCRUD';
 import TimeLineTask from './timeLineTask';
 
+/**
+ * Componente ListTask chamado na Page Home
+ * @returns uma estrutura que vai mostrar o
+ * componente TimeLineList e possibilitar a
+ * criação de uma taerfa
+ */
+
 export default function ListTask() {
   const [showForms, setShowForms] = useState('');
   const [taskOne, setTaskOne] = useState({});
 
   const createTask = () => {
+    /* Vai fazer com que não apareça valores no input
+     diferente do que acontece na edição de uma tarefa */
     setTaskOne({});
+    /* Vai fazer com que a  formulário de criação de uma
+    tarefa apareça */
     setShowForms('create');
   };
+
   return (
     <div className="max-w-6xl m-10 ml-auto mr-auto">
       <div className="flex items-center justify-between w-1/3 mt-20 mb-16 ml-20 text-2xl text-gray-800 border-b border-gray-300 xl:ml-44">

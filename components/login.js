@@ -1,9 +1,17 @@
+/* É importante desabilitar essas configurações para o uso do Tailwind */
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Typewriter from 'typewriter-effect';
 import { authOne } from '../helper/asyncFunc/asyncCollaborator';
+import AlertLogin from './alertLogin';
+
+/**
+ * Componente Login chamado na Page LoginMain
+ * @returns um formulário de autenticação do
+ * usuário para dar acesso ao colaborador
+ */
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -14,11 +22,14 @@ export default function Login() {
   const [alert, setAlert] = useState('invisible');
   const router = useRouter();
 
+  // A função que vai verificar autenticar o usuário
   const auth = async (e) => {
     e.preventDefault();
     setShow(!show);
     const res = await authOne(email, password, router);
 
+    /* Cria um alerta caso o usuário não seja encontrado
+    no banco de dados */
     if (res) {
       setAlertTitle('Falha na autenticação...');
       setAlertDescription(`${res}, reveja a senha e o email preenchidos`);
@@ -69,15 +80,7 @@ export default function Login() {
             </button>
           </form>
         </div>
-        <div className={ `absolute px-4 py-3 text-red-900 bg-red-100 border-t-4 border-red-500 rounded-b shadow-md bottom-0 right-20 ${alert}` } role="alert">
-          <div className="flex">
-            <div className="py-1"><svg className="w-6 h-6 mr-4 text-teal-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" /></svg></div>
-            <div>
-              <p className="text-lg font-bold">{ alertTitle }</p>
-              <p className="text-lg">{ alertDescription }</p>
-            </div>
-          </div>
-        </div>
+        <AlertLogin show={ alert } title={ alertTitle } description={ alertDescription } />
       </div>
     </div>
   );

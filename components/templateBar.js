@@ -1,6 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+/**
+ * Um componente TemplateBar que será chamado no componente ProgressBar
+ * @param {*} param0 um OBJETO com o valor
+ * de uma propriedade via props
+ * @returns uma barra de progresso com base
+ * na porcentagem passada
+ */
+
 export default function TemplateBar({ progressPercentage }) {
   return (
     <div>

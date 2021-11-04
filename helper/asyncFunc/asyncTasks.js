@@ -6,6 +6,8 @@ import {
   fetchDeleteTask,
   fetchUpdateTask } from '../../services/taskAPI';
 
+/* Cria uma nova tarefa no banco de dados através do fetch, numa requisição,
+e alterando a lista tarefas salvas no local storage */
 export const createOne = async ({ title, description, status, date, collab, router }) => {
   console.log(title, description, status, date, collab);
 
@@ -41,6 +43,8 @@ export const createOne = async ({ title, description, status, date, collab, rout
   }
 };
 
+/* Deleta uma tarefa do banco de dados através do fetch, numa requisição,
+e alterando a lista tarefas salvas no local storage */
 export const deleteOne = async (task, router) => {
   try {
     const res = await fetchDeleteTask({
@@ -60,6 +64,8 @@ export const deleteOne = async (task, router) => {
   }
 };
 
+/* Atualiza uma tarefa do banco de dados através do fetch, numa requisição,
+e alterando a lista tarefas salvas no local storage */
 export const updateOne = async ({
   task, collab, status, title, description, date, router }) => {
   try {

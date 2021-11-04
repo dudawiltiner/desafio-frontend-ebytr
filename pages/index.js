@@ -5,6 +5,14 @@ import HomeMain from './home';
 import 'aos/dist/aos.css';
 import NoMobile from '../components/nomobile';
 
+/**
+ * Essa é a parte principal da plataforma, chamada Home e
+ * não pode ser alterado o nome.
+ * @returns um componente NoMobile caso o usuário tente
+ * acessar a plataforma pelo celular, caso contrário, retorna
+ * um Head e o componente HomeMain.
+ */
+
 export default function Home() {
   useEffect(() => {
     Aos.init({ duration: 1000 });

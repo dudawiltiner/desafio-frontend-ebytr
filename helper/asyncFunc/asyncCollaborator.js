@@ -2,6 +2,10 @@ import cookieCutter from 'cookie-cutter';
 import { fetchAuthCollaborator,
   fetchGetAllCollabs } from '../../services/collaboratorAPI';
 
+/* Verficar se já existe um local storage que armazena
+a lista de colaboradores, se já existir não abrirá uma requisição
+para conseguir todos os colaboradores cadastrados para salva-los em
+um item no local storage */
 export const takeCollabs = async () => {
   let arrayCollabs = JSON.parse(localStorage.getItem('collabs'));
 
@@ -22,6 +26,8 @@ export const takeCollabs = async () => {
   }
 };
 
+/* Realiza uma requisição para encontrar o usuário e salvar
+o token e o nome do collaborador no formato de cookie */
 export const authOne = async (email, password, router) => {
   try {
     const res = await fetchAuthCollaborator(email, password);

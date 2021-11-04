@@ -1,29 +1,36 @@
+/* É importante desabilitar essas configurações para o uso do Tailwind */
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import cookieCutter from 'cookie-cutter';
 import { useRouter } from 'next/router';
 import Login from '../components/login';
 import NavBar from '../components/navBar';
 import Loading from '../components/loading';
 import NoMobile from '../components/nomobile';
+import { cookieVerifyLogin } from '../helper/verifyFunc/cookieVerify';
+
+/**
+ * A paǵina da LoginMain acessada com "/login"
+ * @returns um componente NoMobile caso o usuário tente
+ * acessar a plataforma pelo celular, caso contrário, retorna
+ * o componente Login para autenticação do usuário.
+ */
 
 export default function LoginMain() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  const verify = () => {
-    if (cookieCutter.get('token')) {
-      return router.push('/');
-    }
-    setLoading(false);
-  };
-
   useEffect(() => {
+    /*  vai verificar se existe um tokem,
+      ou seja, se o usuário já está autenticado, se já
+      a plataforma vai voltar para a Home */
+    cookieVerifyLogin(router);
+    setLoading(false);
     verify();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div>
       <NoMobile />

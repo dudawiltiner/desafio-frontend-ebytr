@@ -1,3 +1,4 @@
+/* É importante desabilitar essas configurações para o uso do Tailwind */
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
 import PropTypes from 'prop-types';
@@ -5,6 +6,13 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { createOne, deleteOne, updateOne } from '../helper/asyncFunc/asyncTasks';
 import { unDate } from '../helper/convertFunc/formatDate';
+
+/**
+ * Um componente TemplateCRUD usado como template para gerar formulários
+ * de exclusão, edição e criação de tarefas.
+ * @param {*} param0 um OBJETO com os valores de propriedades via props.
+ * @returns um formulário adaptado para a função pedida
+ */
 
 export default function TemplateCRUD({ showRemover, nameType, labelDeadline, labelStatus, close, task }) {
   const [statusList] = useState(JSON.parse(localStorage.getItem('status')));
@@ -18,18 +26,21 @@ export default function TemplateCRUD({ showRemover, nameType, labelDeadline, lab
   const [show1, setShow1] = useState(false);
   const router = useRouter();
 
+  // A função que cria uma nova tarefa no banco de dados
   const createTask = async () => {
     setShow1(!show1);
     await createOne({ title, description, status, date, collab, router });
     setShow1(false);
   };
 
+  // A função que remove uma tarefa do banco de dados
   const deleteTask = async () => {
     setShow(!show);
     await deleteOne(task, router);
     setShow(false);
   };
 
+  // A função que atualiza uma tarefa do banco de dados
   const updateTask = async () => {
     setShow1(!show1);
     await updateOne({

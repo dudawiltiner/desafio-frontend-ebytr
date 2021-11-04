@@ -1,6 +1,14 @@
+/* É importante desabilitar essas configurações para o uso do Tailwind */
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
 import React from 'react';
+
+/**
+ * Uma page Customizada para tratar o erro 404
+ * @returns uma estrutura que orienta o usuário a
+ * como voltar para Home após digitar a URL errada
+ * na barra de busca.
+ */
 
 export default function Custom404() {
   return (

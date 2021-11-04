@@ -1,3 +1,4 @@
+/* É importante desabilitar essas configurações para o uso do Tailwind */
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
 import PropTypes from 'prop-types';
@@ -5,14 +6,28 @@ import React, { useState } from 'react';
 import { foundName } from '../helper/convertFunc/convertStatusCollab';
 import TemplateBar from './templateBar';
 
+/**
+ * Componente ProgressBar usado na Page Home
+ * @param { } param0 um OBJETO que carrega o valor da propriedade
+ * via props
+ * @returns o componente TemplateBar com a porcentagem de tarefas feitas e
+ * fornece um resumo da lista de tarefas já feitas
+ */
+
 export default function ProgressBar({ collaborator }) {
   const [tasks] = useState(JSON.parse(localStorage.getItem('tasks')));
+
   let tasksDone;
   let noTasksDone;
-  if (tasks.length !== 0) {
-    tasksDone = tasks.filter((item) => foundName(item.statusId, true) === 'Pronto');
-    noTasksDone = tasks.filter((item) => foundName(item.statusId, true) !== 'Pronto');
+
+  // Vai separar as tasks em doia grupos
+  // O grupo dos PRONTOS e o grupo dos NÃO PRONTOS
+  if (tasks) {
+    tasksDone = tasks.length !== 0 ? tasks.filter((item) => foundName(item.statusId, true) === 'Pronto') : [];
+    noTasksDone = tasks.length !== 0 ? tasks.filter((item) => foundName(item.statusId, true) !== 'Pronto') : [];
   }
+
+  // Calcula a porcentagem das atividades já feitas
   const PERCENT = (tasksDone.length / tasks.length) * 100;
 
   return (

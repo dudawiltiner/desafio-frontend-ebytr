@@ -1,9 +1,20 @@
+/* É importante desabilitar essas configurações para o uso do Tailwind */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-max-depth */
 /* eslint-disable max-len */
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { convertStatus, foundName, NEGATIVENUMBER, NULLNUMBER, POSITIVENUMBER } from '../helper/convertFunc/convertStatusCollab';
+import { foundName } from '../helper/convertFunc/convertStatusCollab';
+import { compareDate, compareStatus, compareTitle } from '../helper/orderFunc/compare';
+
+/**
+ * Componente TimeLineTask chamado na Page ListTask.
+ * @param {*} param0  recebe com parâmetro um OBJETO
+ * com duas propriedades via props.
+ * @returns uma estrutura que vai mostrar uma lista
+ * de tarefas que estarão armazenadas num localStorage
+ * Também vai retornar botões para ordenar a Lista.
+ */
 
 export default function TimeLineTask({ showEdit, setTask }) {
   const [taskList, setTaskList] = useState(JSON.parse(localStorage.getItem('tasks')));
@@ -12,11 +23,17 @@ export default function TimeLineTask({ showEdit, setTask }) {
   const [list, setList] = useState(taskList.map(() => 'invisible h-0'));
 
   const saveTask = (task) => {
+    /* Vai fazer com que apareça valores no input
+     diferente do que acontece na criação de uma tarefa */
     setTask(task);
+    /* Vai fazer com que a formulário de edição de uma
+     tarefa apareça */
     showEdit('change');
   };
 
-  const clickStep = (index) => {
+  /* A função vai disponibilizar um conetúdo com mais
+  detalhes sobre a tarefa que o usuário acabou de clicar */
+  const clickTask = (index) => {
     const newArray = seta;
     const newList = list;
 
@@ -31,36 +48,21 @@ export default function TimeLineTask({ showEdit, setTask }) {
     setList([...newList]);
   };
 
+  // A função ordena a lista por ordem alfabética
   const alphabeticalOrder = () => {
-    function compare(a, b) {
-      if (a.title.toUpperCase() < b.title.toUpperCase()) { return NEGATIVENUMBER; }
-      if (a.title.toUpperCase() > b.title.toUpperCase()) { return POSITIVENUMBER; }
-      return NULLNUMBER;
-    }
-
-    const arrayList = taskList.sort(compare);
+    const arrayList = taskList.sort(compareTitle);
     setTaskList([...arrayList]);
   };
 
+  // A função ordena por data de criação
   const dateOrder = () => {
-    function compare(a, b) {
-      if (a.createdDate < b.createdDate) { return NEGATIVENUMBER; }
-      if (a.createdDate > b.createdDate) { return POSITIVENUMBER; }
-      return NULLNUMBER;
-    }
-
-    const arrayList = taskList.sort(compare);
+    const arrayList = taskList.sort(compareDate);
     setTaskList([...arrayList]);
   };
 
+  // A função ordena pelo status
   const statusOrder = () => {
-    function compare(a, b) {
-      if (convertStatus(foundName(a.statusId, true)) < convertStatus(foundName(b.statusId, true))) { return NEGATIVENUMBER; }
-      if (convertStatus(foundName(a.statusId, true)) > convertStatus(foundName(b.statusId, true))) { return POSITIVENUMBER; }
-      return NULLNUMBER;
-    }
-
-    const arrayList = taskList.sort(compare);
+    const arrayList = taskList.sort(compareStatus);
     setTaskList([...arrayList]);
   };
 
@@ -97,7 +99,7 @@ export default function TimeLineTask({ showEdit, setTask }) {
                 <div className="z-10 flex items-center justify-center w-4 h-4 rounded-full bg-red-color">
                   <div className="w-2 h-2 bg-white border-2 border-gray-500 rounded-full " />
                 </div>
-                <div role="button" tabIndex="0" onClick={ () => clickStep(index) } className="flex justify-between w-full p-2 ml-4 font-medium text-gray-600 rounded-lg shadow-lg cursor-pointer">
+                <div role="button" tabIndex="0" onClick={ () => clickTask(index) } className="flex justify-between w-full p-2 ml-4 font-medium text-gray-600 rounded-lg shadow-lg cursor-pointer">
                   <div className="flex items-center space-x-4 text-lg">
                     <p>{item.title}</p>
                     <div className="flex items-center space-x-1">
