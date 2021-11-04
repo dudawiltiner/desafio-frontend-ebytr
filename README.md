@@ -9,7 +9,7 @@ Foi criada uma tela de **Login** que vai servir para autenticação dos usuário
 
 Todas as telas foram feitas, primeiramente, de forma estática para então obter dados a partir da conexão com a **API** criada no **back-end**, para preencher cada estrutura dinâmicamente. É importante dizer que alguns testes foram realizados para garantir o funcionamento e melhor manutenção do código.
 
-As ferramentas principais utilizadas foram:
+### As ferramentas principais utilizadas foram:
 
 [React](https://reactjs.org/)<br>
 [Next](https://nextjs.org/)<br>
