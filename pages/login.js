@@ -22,12 +22,11 @@ export default function LoginMain() {
   const router = useRouter();
 
   useEffect(() => {
-    /*  vai verificar se existe um tokem,
-      ou seja, se o usuário já está autenticado, se já
-      a plataforma vai voltar para a Home */
+    /* vai verificar se existe um tokem,
+    ou seja, se o usuário já está autenticado, se já
+    a plataforma vai voltar para a Home */
     cookieVerifyLogin(router);
     setLoading(false);
-    verify();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -34,7 +34,7 @@ export const authOne = async (email, password, router) => {
     if (!res.message) {
       const dateLater = new Date();
       dateLater.setDate(dateLater.getDate() + 1);
-      // console.log(dateLater)
+
       cookieCutter.set('token', res.token, { expires: dateLater });
       cookieCutter.set('collaborator', res.collaborator, { expires: dateLater });
       console.log(res, cookieCutter.get('token'), cookieCutter.get('collaborator'));

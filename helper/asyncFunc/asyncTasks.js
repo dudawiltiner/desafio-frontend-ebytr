@@ -9,8 +9,6 @@ import {
 /* Cria uma nova tarefa no banco de dados através do fetch, numa requisição,
 e alterando a lista tarefas salvas no local storage */
 export const createOne = async ({ title, description, status, date, collab, router }) => {
-  console.log(title, description, status, date, collab);
-
   try {
     const res = await fetchCreateTask({
       token: cookieCutter.get('token'),
@@ -54,7 +52,7 @@ export const deleteOne = async (task, router) => {
     if (res.message === 'Tarefa excluída com sucesso') {
       const arrayTotal = JSON.parse(localStorage.getItem('tasks'));
       const newA = arrayTotal.filter((item) => item._id !== task._id);
-      console.log(arrayTotal);
+
       localStorage.setItem('tasks', JSON.stringify(newA));
       router.reload();
     }
