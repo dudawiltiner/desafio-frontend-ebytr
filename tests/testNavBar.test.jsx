@@ -7,14 +7,14 @@ import NavBar from '../components/navBar';
 describe('Quando renderizado o componete NavBar na tela Home', () => {
   it('O nome do usuário autenticado deve aparecer como um botão', () => {
     render(<NavBar showName name="Nome de uma pessoa" />);
-    const nameElement = screen.getByRole('button', { name: 'Nome de uma pessoa' });
-    expect(nameElement).toBeInTheDocument();
+    const buttonElement = screen.getByRole('button', { name: 'Nome de uma pessoa' });
+    expect(buttonElement).toBeInTheDocument();
   });
 
   it('E se esse botão for clicado, deve aparecer um outro de Logout', () => {
     render(<NavBar showName name="Nome de uma pessoa" />);
-    const nameElement = screen.getByRole('button', { name: 'Nome de uma pessoa' });
-    expect(nameElement).toBeInTheDocument();
+    const buttonElement = screen.getByRole('button', { name: 'Nome de uma pessoa' });
+    expect(buttonElement).toBeInTheDocument();
 
     userEvent.click(nameElement);
 

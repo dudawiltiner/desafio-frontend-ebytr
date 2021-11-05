@@ -26,4 +26,16 @@ export const foundName = (id, isStatus) => {
   }
 };
 
+// Encontra o id correspondente do nome do colaborador
+export const foundIdCollaborator = (collaborator) => {
+  const collabList = JSON.parse(localStorage.getItem('collabs'));
+  console.log(collabList);
+  if (collabList !== null) {
+    const collabFiltered = collabList
+      .filter((item) => item.nameCollab.join(' ').includes(collaborator));
+    console.log(collabList);
+    return collabFiltered[0].id;
+  }
+};
+
 export default { convertStatus };

@@ -4,8 +4,10 @@
 /* eslint-disable max-len */
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { foundName } from '../helper/convertFunc/convertStatusCollab';
+import cookieCutter from 'cookie-cutter';
+import { foundIdCollaborator, foundName } from '../helper/convertFunc/convertStatusCollab';
 import { compareDate, compareStatus, compareTitle } from '../helper/orderFunc/compare';
+import ButtonOrder from './buttonOrder';
 
 /**
  * Componente TimeLineTask chamado na Page ListTask.
@@ -17,8 +19,12 @@ import { compareDate, compareStatus, compareTitle } from '../helper/orderFunc/co
  */
 
 export default function TimeLineTask({ showEdit, setTask }) {
-  const [taskList, setTaskList] = useState(JSON.parse(localStorage.getItem('tasks')));
+  const [taskList, setTaskList] = useState(!localStorage.getItem('tasks') ? []
+    : JSON.parse(localStorage.getItem('tasks')));
+  const [originalTasks, setOriginalTasks] = useState([]);
+  const [collaboratorName] = useState(cookieCutter.get('collaborator'));
   const [colors] = useState({ Pendente: 'red', Andamento: 'yellow', Pronto: 'blue' });
+  const [isFiltered, setIsFiltered] = useState(false);
   const [seta, setSeta] = useState(taskList.map(() => ''));
   const [list, setList] = useState(taskList.map(() => 'invisible h-0'));
 
@@ -66,29 +72,29 @@ export default function TimeLineTask({ showEdit, setTask }) {
     setTaskList([...arrayList]);
   };
 
+  // A função filtra todas as atividades referentes ao usuário
+  const nameFilter = () => {
+    if (isFiltered) {
+      setTaskList([...originalTasks]);
+      setIsFiltered(false);
+    } else {
+      const collabId = foundIdCollaborator(collaboratorName);
+      setOriginalTasks([...taskList]);
+      const arrayList = taskList.filter((task) => task.collaboratorId === collabId);
+      setTaskList([...arrayList]);
+      setIsFiltered(true);
+    }
+  };
+
   return (
     <div>
-      <div className="flex w-5/6 m-8 mb-16 ml-auto mr-auto space-x-10 xl:w-4/6 ">
-        <button onClick={ dateOrder } type="button" className="flex items-center px-2 py-1 space-x-2 text-white rounded-md bg-blue-color">
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          <p>Organizar por Data</p>
-        </button>
-        <button onClick={ alphabeticalOrder } type="button" className="flex items-center px-2 py-1 space-x-2 text-white rounded-md bg-brown-color">
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z" />
-          </svg>
-          <p>Em Ordem Alfabética</p>
-        </button>
-        <button onClick={ statusOrder } type="button" className="flex items-center px-2 py-1 space-x-2 text-white rounded-md bg-yellow-color">
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-          </svg>
-          <p>Organizar por Status</p>
-        </button>
-      </div>
-
+      <ButtonOrder
+        dateFuncOrder={ dateOrder }
+        alphaFuncOrder={ alphabeticalOrder }
+        statusFuncOrder={ statusOrder }
+        filterNameFunc={ nameFilter }
+        filterStatus={ isFiltered }
+      />
       <div className="relative w-4/6 m-8 ml-auto mr-auto">
         <div className="absolute top-0 z-0 w-1.5 h-full text-lg border-r-2 border-red-color border-t-6 left-0.5" />
         <ul className="p-0 m-0 list-none">
